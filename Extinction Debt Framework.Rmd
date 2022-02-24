@@ -1,28 +1,60 @@
 ---
-title: "Extinction Debt Framework"
-output: pdf_document
+title: "A Framework for Quantifying Extinction Debts in Single Species and Communities"
+author: Jason Matthiopoulos
+date: "`r Sys.Date()`"
+output:
+  bookdown::pdf_document2:
+    toc: no
+  html_document:
+    df_print: paged
+  word_document: default
+  pdf_document:
+    toc: no
+fontsize: 10pt
+geometry: left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm
+header-includes:
+- \usepackage{setspace}
+- \usepackage{amsmath}
+- \usepackage{lineno}
+#- \linenumbers
+keywords: pandoc, r markdown, knitr
+linestretch: 1
+link-citations: yes
+csl: ecol monogr.csl
+bibliography: ExtinctionDebts.bib
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+<!--- 
+install.packages("gitcreds") 
+library(gitcreds)
+gitcreds_set()
+--->
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Motivation
+Much of the reading of the reviews and empirical studies on time lags and extinction debts has highlighted three features that need to be included in a biologically realistic framework of delays in biodiversity. 
 
-```{r cars}
-summary(cars)
-```
+1. Growth rates of single species
+2. Rescue effects due to spatial structuring
+3. Community effects brought about by interspecific interactions
 
-## Including Plots
+Although the importance of 2 and 3 is correctly stressed in some of the better papers, a good starting point to formalize our thinking must be the **single-species**, **closed** population model. Any such model will contain a direct or indirect formulation for carrying capacity, bringing us closer to the notion of a latent equilibrium introduced in @Haddou2022. In that paper, we assumed that the equilibrium was being constantly perturbed by land-cover changes. We are now trying to extend our examination to time-series data, so that the *transient* state of the population can be better represented. Transience will depend on speed of movement. Intuitive notions such as that "*in nature, things move violently to their place, and calmly in their place*" (Sir Francis Bacon) link the population dynamical notions of intrinsic growth and carrying capacity, and both of these need to be written in terms of landscape covariates for our framework to have value for studying hystereses in biodiversity responses to landscape change.
 
-You can also embed plots, for example:
+# Single-species, closed populations
+Modelling in discrete time, purely because both data and inferrence are likely to do so (but with the possibility to extend to differential equations if needed), consider a general version of the Ricker logistic model for single populations (e.g., eq. (3.49) in @Matthiopoulos2011a)
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+$$N_{t+1}=N_t\exp(a_0-a_NN_t)$$
+In this expression, the intrinsic growth rate is $r=\exp(a_0)$ and $a_N$ represents the strength of density dependence. The model has a non-zero equilibrium at $N^*=a_0/a_N$. We can generalize this by replacing the constant $a_0$ by a function of $n$ environmental variables $f(\mathbf{x})$, such as, for example,
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+$$f(\mathbf{x})=\sum_{i=0}^n a_i x_i$$
+or some other, more complicated (non-)linear predictor function. The non-trivial equilibrium here will be $N^*=f(\mathbf{x})/a_N$
+
+
+
+# References
+
+
